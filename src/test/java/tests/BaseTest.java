@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -29,6 +30,7 @@ public class BaseTest {
     }
 
     @AfterClass
+    @Step("Очистка кэша")
     void clearCookiesAndLocalStorage() {
         if (getClearCookies()) {
             JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
@@ -38,6 +40,7 @@ public class BaseTest {
     }
 
     @AfterClass
+    @Step("Закрытие браузера")
     public void tearDown() {
         driver.quit();
     }

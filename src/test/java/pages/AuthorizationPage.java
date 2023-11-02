@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
@@ -30,34 +31,40 @@ public class AuthorizationPage extends BasePage {
         openMainPage();
     }
 
+    @Step("Открытие главной страницы")
     void openMainPage() {
         driver.get(getUrl());
     }
 
+    @Step("Ввод значения '{text}' в поле 'Username'")
     public AuthorizationPage inputUsername(String text) {
         clearAndType(driver, username, text);
         return this;
     }
-
+    @Step("Ввод значения '{text}' в поле 'Password'")
     public AuthorizationPage inputPassword(String text) {
         clearAndType(driver, password, text);
         return this;
     }
 
+    @Step("Ввод значения '{text}' в поле 'Username *'")
     public AuthorizationPage inputUsernameDescription(String text) {
         clearAndType(driver, usernameDescription, text);
         return this;
     }
 
+    @Step("Клик на кнопку 'Login'")
     public void clickButtonLogin() {
         clickButton(driver, loginButton);
     }
 
+    @Step("Переключение на окно авторизации")
     public AuthorizationPage switchToThisWindow() {
         MainSteps.switchToWindow(driver);
         return this;
     }
 
+    @Step("Получение текста сообщения об успешном входе: '"+SUCCESS_MASSAGE+"'")
     public String getSuccessMessageText() {
         waitElementIsVisible(driver, successMessage);
         return successMessage.getText();

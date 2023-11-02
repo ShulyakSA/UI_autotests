@@ -1,5 +1,6 @@
 package elements;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -30,6 +31,7 @@ public class Footer {
         }
     }
 
+    @Step("Поиск элемента '{text}'")
     private WebElement findFooterElementByText(String text) throws NoSuchElementException {
         try {
             waitElementIsVisible(driver, footerRoot);
@@ -53,6 +55,7 @@ public class Footer {
         return findFooterElementByText(ABOUT_US);
     }
 
+    @Step("Переход к футеру")
     public Footer scrollToFooter() {
         scrollToElement(driver, footerRoot);
         return this;

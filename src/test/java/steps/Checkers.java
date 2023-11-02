@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 
@@ -16,6 +17,7 @@ public class Checkers extends BasePage {
         this.driver = webDriver;
     }
 
+    @Step("Проверка видимости элемента")
     public static Boolean checkElementIsDisplayed(WebElement element) {
         try {
             return element.isDisplayed();
@@ -25,6 +27,7 @@ public class Checkers extends BasePage {
         }
     }
 
+    @Step("Проверка наличия элемента")
     public static Boolean checkElementIsPresent(WebElement element) {
         try {
             return element.isEnabled();

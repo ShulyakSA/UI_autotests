@@ -1,14 +1,22 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import static io.qameta.allure.SeverityLevel.*;
 import static steps.Checkers.checkElementIsDisplayed;
 import static steps.Checkers.checkElementIsPresent;
 
 public class MainPageElementsTest extends BaseTest {
-
+    @Epic(value="Хэдер")
+    @Feature(value="Наличие элементов")
+    @Story(value="Элементы хедера")
+    @Severity(CRITICAL)
     @Test(description = "Проверка наличия элементов хедера с реквизитами для связи")
     public void checkHeaderElementsPresent() {
         mainPage.onHeader().scrollToHeader();
@@ -21,6 +29,10 @@ public class MainPageElementsTest extends BaseTest {
         assertContacts.assertAll();
     }
 
+    @Epic(value="Навигационная панель")
+    @Feature(value="Наличие элементов")
+    @Story(value="Элементы горизонтального меню")
+    @Severity(CRITICAL)
     @Test(description = "Проверка наличия элементов горизонтального меню")
     public void checkNavBarElementsPresent() {
         mainPage.onNavBar().scrollToNavbar();
@@ -37,6 +49,10 @@ public class MainPageElementsTest extends BaseTest {
         assertNavBar.assertAll();
     }
 
+    @Epic(value="Блок с сертификацией")
+    @Feature(value="Наличие элементов")
+    @Story(value="Элементы блока с сертификацией")
+    @Severity(CRITICAL)
     @Test(description = "Проверка наличия элементов блока с сертификацией")
     public void checkCertificationElementsPresent() {
         mainPage.scrollToCertificationBlock();
@@ -49,12 +65,20 @@ public class MainPageElementsTest extends BaseTest {
         assertCertBlock.assertAll();
     }
 
-    @Test(description = "Проверка наличия элементов слайдера в блоке с курсами")
+    @Epic(value="Блок с курсами")
+    @Feature(value="Наличие элементов")
+    @Story(value="Элементы блока с курсами")
+    @Severity(CRITICAL)
+    @Test(description = "Проверка слайдера")
     public void checkCourseBlockSlider() {
         mainPage.scrollToCourseBlock().clickButtonNextSlide();
         Assert.assertTrue(checkElementIsDisplayed(mainPage.getAppiumCourse()));
     }
 
+    @Epic(value="Футер")
+    @Feature(value="Наличие элементов")
+    @Story(value="Элементы футера")
+    @Severity(NORMAL)
     @Test(description = "Проверка наличия элементов футера")
     public void checkFooterElementsPresent() {
         mainPage.onFooter().scrollToFooter();
