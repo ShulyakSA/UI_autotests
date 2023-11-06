@@ -1,5 +1,6 @@
 package elements;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -32,6 +33,7 @@ public class Header {
         }
     }
 
+    @Step("Поиск элемента '{text}'")
     private WebElement findHeaderElementByText(String text) throws NoSuchElementException {
         try {
             waitElementIsVisible(driver, headerRoot);
@@ -63,6 +65,7 @@ public class Header {
         return findHeaderElementByText(EMAIL);
     }
 
+    @Step("Переход к хедеру")
     public Header scrollToHeader() {
         scrollToElement(driver, headerRoot);
         return this;

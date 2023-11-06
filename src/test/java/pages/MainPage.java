@@ -3,6 +3,7 @@ package pages;
 import elements.Footer;
 import elements.Header;
 import elements.NavBar;
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -52,6 +53,7 @@ public class MainPage extends BasePage {
         return new Footer(driver);
     }
 
+    @Step("Поиск элемента '{text}'")
     private WebElement findElementByText(String text, WebElement rootElement) throws NoSuchElementException {
         try {
             waitElementIsVisible(driver, rootElement);
@@ -95,15 +97,18 @@ public class MainPage extends BasePage {
         return getCoursesBlockElement(APPIUM_COURSE);
     }
 
+    @Step("Нажатие на кнопку слайдера 'Next slide'")
     public void clickButtonNextSlide() {
         clickButton(driver, nextSlideButton);
     }
 
+    @Step("Переход к блоку 'Most Popular Software Testing Courses'")
     public MainPage scrollToCourseBlock() {
         scrollToElement(driver, courseBlock);
         return this;
     }
 
+    @Step("Переход к блоку 'Best Selenium Certification Course Online'")
     public MainPage scrollToCertificationBlock() {
         scrollToElement(driver, certificationBlock);
         return this;

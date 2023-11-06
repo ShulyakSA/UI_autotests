@@ -1,5 +1,6 @@
 package elements;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -41,6 +42,7 @@ public class NavBar {
         }
     }
 
+    @Step("Поиск элемента '{text}'")
     public WebElement findNavBarElementsByText(String text) throws NoSuchElementException {
         try {
             waitElementIsVisible(driver, headerNavBar);
@@ -88,21 +90,25 @@ public class NavBar {
         return findNavBarElementsByText(MEMBER_LOGIN);
     }
 
+    @Step("Переход к панели навигации")
     public NavBar scrollToNavbar() {
         scrollToElement(driver, headerNavBar);
         return this;
     }
 
+    @Step("Нажатие на элемент '"+RESOURCES_MENU+"'")
     public NavBar clickResources() {
         clickButton(driver, getResourcesMenu());
         return this;
     }
 
+    @Step("Нажатие на элемент 'Practice Site 2'")
     public NavBar clickPracticeSiteTwo() {
         clickButton(driver, practiceSiteTwo);
         return this;
     }
 
+    @Step("Нажатие на элемент 'Practice Site 1'")
     public NavBar clickPracticeSiteOne() {
         clickButton(driver, practiceSiteOne);
         return this;

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ public class PracticeSiteOnePage extends BasePage {
         super(webDriver);
     }
 
+    @Step("Получение текста заголовка страницы")
     public String getTitleLoadForm() {
         return getText(driver, titleLoadForm);
     }
