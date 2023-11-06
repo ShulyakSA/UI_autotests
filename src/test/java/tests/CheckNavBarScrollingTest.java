@@ -10,9 +10,10 @@ import org.testng.annotations.Test;
 import static io.qameta.allure.SeverityLevel.MINOR;
 import static steps.Checkers.checkElementIsDisplayed;
 
+@Epic(value="Главная страница")
+@Feature(value = "Отображение панели при скроллинге")
 public class CheckNavBarScrollingTest extends BaseTest {
-    @Epic(value="Навигационная панель")
-    @Feature(value = "Отображение панели при скроллинге")
+
     @Story(value = "Видимость элементов при скроллинге")
     @Severity(MINOR)
     @Test(description = "Проверка, что при скроллинге отображается основное меню в шапке на главной")

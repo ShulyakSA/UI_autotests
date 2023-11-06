@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import static config.TestConfig.*;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 
+@Epic(value ="Форма регистрации")
+@Feature(value = "Авторизация")
 public class AuthorizationTest extends BaseTest {
 
     @BeforeMethod
@@ -21,8 +23,6 @@ public class AuthorizationTest extends BaseTest {
         practiceSiteTwoPage.clickRegistrationFormLink();
     }
 
-    @Epic(value ="Форма регистрации")
-    @Feature(value = "Авторизация")
     @Story(value = "Заполнение формы регистрации")
     @Severity(BLOCKER)
     @Test(description = "Проверка авторизации")
