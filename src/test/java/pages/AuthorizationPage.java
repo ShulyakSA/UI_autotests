@@ -14,17 +14,22 @@ import static steps.MainSteps.*;
 
 @Slf4j
 public class AuthorizationPage extends BasePage {
-    public final String SUCCESS_MASSAGE = "You're logged in!!";
+    public final String SUCCESS_MESSAGE = "You're logged in!!";
+    public final String FAILED_MESSAGE = "Username or password is incorrect";
     @FindBy(id = "username")
     WebElement username;
     @FindBy(id = "password")
     WebElement password;
-    @FindBy(id = "formly_1_input_username_0")
+    @FindBy(xpath = "//input[contains(@id, 'input_username_0')]")
     WebElement usernameDescription;
     @FindBy(xpath = "//button[contains(text(),'Login')]")
     WebElement loginButton;
     @FindBy(xpath = "//p[text()=\"You're logged in!!\"]")
     WebElement successMessage;
+    @FindBy(xpath = "//a[@href='#/login']")
+    WebElement logoutLink;
+    @FindBy(xpath = "//div[@ng-if='Auth.error']")
+    WebElement failedMessage;
 
     public AuthorizationPage(WebDriver webDriver) {
         super(webDriver);
@@ -38,11 +43,14 @@ public class AuthorizationPage extends BasePage {
 
     @Step("Ввод значения '{text}' в поле 'Username'")
     public AuthorizationPage inputUsername(String text) {
+        waitElementIsVisible(driver, username);
         clearAndType(driver, username, text);
         return this;
     }
+
     @Step("Ввод значения '{text}' в поле 'Password'")
     public AuthorizationPage inputPassword(String text) {
+        waitElementIsVisible(driver, password);
         clearAndType(driver, password, text);
         return this;
     }
@@ -58,15 +66,26 @@ public class AuthorizationPage extends BasePage {
         clickButton(driver, loginButton);
     }
 
+    @Step("Клик на ссылку 'Logout'")
+    public void clickLogoutLink() {
+        clickButton(driver, logoutLink);
+    }
+
     @Step("Переключение на окно авторизации")
     public AuthorizationPage switchToThisWindow() {
         MainSteps.switchToWindow(driver);
         return this;
     }
 
-    @Step("Получение текста сообщения об успешном входе: '"+SUCCESS_MASSAGE+"'")
+    @Step("Получение текста сообщения об успешном входе: '" + SUCCESS_MESSAGE + "'")
     public String getSuccessMessageText() {
         waitElementIsVisible(driver, successMessage);
         return successMessage.getText();
+    }
+
+    @Step("Получение текста сообщения сообщения об ошибке: '" + FAILED_MESSAGE + "'")
+    public String getFailedMessageText() {
+        waitElementIsVisible(driver, failedMessage);
+        return failedMessage.getText();
     }
 }
