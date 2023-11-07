@@ -5,7 +5,8 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static config.TestConfig.*;
@@ -15,24 +16,38 @@ import static io.qameta.allure.SeverityLevel.BLOCKER;
 @Feature(value = "Авторизация")
 public class AuthorizationTest extends BaseTest {
 
-    @BeforeMethod
+    @BeforeTest
     public void gotoRegistrationForm(){
         mainPage.onNavBar()
                 .clickResources()
                 .clickPracticeSiteTwo();
         practiceSiteTwoPage.clickRegistrationFormLink();
+        authorizationPage.switchToThisWindow();
+    }
+
+    @DataProvider(name = "Auth")
+    public static Object[][] AuthData() {
+        return new Object[][] {
+                {getUsername(),getPassword(), getUsernameDescription(), authorizationPage.SUCCESS_MESSAGE},
+                {"Petrovich",getPassword(), getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
+                {getUsername(),"QWERTY", getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
+                {getUsername(),getPassword(), "Ivan Petrovich", authorizationPage.SUCCESS_MESSAGE},
+        };
     }
 
     @Story(value = "Заполнение формы регистрации")
     @Severity(BLOCKER)
-    @Test(description = "Проверка авторизации")
-    public void authorizationTest() {
+    @Test(description = "Проверка авторизации", dataProvider = "Auth")
+    public void authorizationTest(String userName, String password, String description, String expectedMessage) {
         authorizationPage
-                .switchToThisWindow()
-                .inputUsername(getUsername())
-                .inputPassword(getPassword())
-                .inputUsernameDescription(getUsernameDescription())
+                .inputUsername(userName)
+                .inputPassword(password)
+                .inputUsernameDescription(description)
                 .clickButtonLogin();
-        Assert.assertEquals(authorizationPage.getSuccessMessageText(), authorizationPage.SUCCESS_MASSAGE);
+        if (expectedMessage==authorizationPage.SUCCESS_MESSAGE){
+        Assert.assertEquals(authorizationPage.getSuccessMessageText(), expectedMessage);
+        authorizationPage.clickLogoutLink();
+        }
+        else Assert.assertEquals(authorizationPage.getFailedMessageText(), expectedMessage);
     }
 }

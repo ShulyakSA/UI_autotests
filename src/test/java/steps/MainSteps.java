@@ -28,7 +28,6 @@ public class MainSteps extends BasePage {
     }
 
     public static void clearAndType(WebDriver driver, WebElement element, String text) {
-        waitElementIsVisible(driver, element);
         element.clear();
         element.sendKeys(text);
     }

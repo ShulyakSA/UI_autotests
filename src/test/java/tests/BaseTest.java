@@ -3,8 +3,7 @@ package tests;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 import pages.AuthorizationPage;
 import pages.MainPage;
 import pages.PracticeSiteOnePage;
@@ -18,9 +17,9 @@ public class BaseTest {
     protected MainPage mainPage;
     protected PracticeSiteOnePage practiceSiteOnePage;
     protected PracticeSiteTwoPage practiceSiteTwoPage;
-    protected AuthorizationPage authorizationPage;
+    protected static AuthorizationPage authorizationPage;
 
-    @BeforeClass
+    @BeforeTest
     public void init() {
         driver = createWebDriver();
         mainPage = new MainPage(driver);
@@ -29,7 +28,7 @@ public class BaseTest {
         authorizationPage = new AuthorizationPage(driver);
     }
 
-    @AfterClass
+    @AfterTest
     @Step("Очистка кэша")
     void clearCookiesAndLocalStorage() {
         if (getClearCookies()) {
@@ -39,7 +38,7 @@ public class BaseTest {
         }
     }
 
-    @AfterClass
+    @AfterTest
     @Step("Закрытие браузера")
     public void tearDown() {
         driver.quit();
