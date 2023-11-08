@@ -1,5 +1,6 @@
 package tests;
 
+import helpers.TestListener;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import pages.PracticeSiteTwoPage;
 import static config.WebConfig.getClearCookies;
 import static helpers.WebDriverFactory.createWebDriver;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     public WebDriver driver;
     protected MainPage mainPage;

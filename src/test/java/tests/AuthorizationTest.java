@@ -12,12 +12,12 @@ import org.testng.annotations.Test;
 import static config.TestConfig.*;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 
-@Epic(value ="Форма регистрации")
+@Epic(value = "Форма регистрации")
 @Feature(value = "Авторизация")
 public class AuthorizationTest extends BaseTest {
 
     @BeforeTest
-    public void gotoRegistrationForm(){
+    public void gotoRegistrationForm() {
         mainPage.onNavBar()
                 .clickResources()
                 .clickPracticeSiteTwo();
@@ -27,11 +27,11 @@ public class AuthorizationTest extends BaseTest {
 
     @DataProvider(name = "Auth")
     public static Object[][] AuthData() {
-        return new Object[][] {
-                {getUsername(),getPassword(), getUsernameDescription(), authorizationPage.SUCCESS_MESSAGE},
-                {"Petrovich",getPassword(), getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
-                {getUsername(),"QWERTY", getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
-                {getUsername(),getPassword(), "Ivan Petrovich", authorizationPage.SUCCESS_MESSAGE},
+        return new Object[][]{
+                {getUsername(), getPassword(), getUsernameDescription(), authorizationPage.SUCCESS_MESSAGE},
+                {"Petrovich", getPassword(), getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
+                {getUsername(), "QWERTY", getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
+                {getUsername(), getPassword(), "Ivan Petrovich", authorizationPage.SUCCESS_MESSAGE},
         };
     }
 
@@ -44,10 +44,11 @@ public class AuthorizationTest extends BaseTest {
                 .inputPassword(password)
                 .inputUsernameDescription(description)
                 .clickButtonLogin();
-        if (expectedMessage==authorizationPage.SUCCESS_MESSAGE){
-        Assert.assertEquals(authorizationPage.getSuccessMessageText(), expectedMessage);
-        authorizationPage.clickLogoutLink();
+        if (expectedMessage == authorizationPage.SUCCESS_MESSAGE) {
+            Assert.assertEquals(authorizationPage.getSuccessMessageText(), expectedMessage);
+            authorizationPage.clickLogoutLink();
+        } else {
+            Assert.assertEquals(authorizationPage.getFailedMessageText(), expectedMessage);
         }
-        else Assert.assertEquals(authorizationPage.getFailedMessageText(), expectedMessage);
     }
 }

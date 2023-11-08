@@ -83,7 +83,7 @@ public class AuthorizationPage extends BasePage {
         return successMessage.getText();
     }
 
-    @Step("Получение текста сообщения сообщения об ошибке: '" + FAILED_MESSAGE + "'")
+    @Step("Получение текста сообщения об ошибке: '" + FAILED_MESSAGE + "'")
     public String getFailedMessageText() {
         waitElementIsVisible(driver, failedMessage);
         return failedMessage.getText();

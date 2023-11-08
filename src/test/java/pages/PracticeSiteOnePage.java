@@ -11,7 +11,7 @@ import static steps.MainSteps.getText;
 
 @Slf4j
 public class PracticeSiteOnePage extends BasePage {
-    public final String TITLE_LOAD_FORM_ = "DUMMY REGISTRATION FORM";
+    public final String TITLE_LOAD_FORM = "DUMMY REGISTRATION FORM";
     @FindBy(xpath = "//*[@id='load_form']/h3[text()='Dummy Registration Form']")
     WebElement titleLoadForm;
 

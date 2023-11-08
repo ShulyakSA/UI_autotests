@@ -31,6 +31,8 @@ public class MainPage extends BasePage {
     WebElement courseBlock;
     @FindBy(xpath = ".//div[@aria-label='Next slide']")
     WebElement nextSlideButton;
+    @FindBy(xpath = ".//div[@aria-label='Previous slide']")
+    WebElement previousSlideButton;
 
     public MainPage(WebDriver webDriver) {
         super(webDriver);
@@ -100,6 +102,10 @@ public class MainPage extends BasePage {
     @Step("Нажатие на кнопку слайдера 'Next slide'")
     public void clickButtonNextSlide() {
         clickButton(driver, nextSlideButton);
+    }
+    @Step("Нажатие на кнопку слайдера 'Next slide'")
+    public void clickButtonPreviousSlide() {
+        clickButton(driver, previousSlideButton);
     }
 
     @Step("Переход к блоку 'Most Popular Software Testing Courses'")

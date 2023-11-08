@@ -18,6 +18,6 @@ public class GoToPageTest extends BaseTest {
     @Test(description = "Проверка перехода по меню 'Resources' на страницу 'Practice Site 1'")
     public void goToPage() {
         mainPage.onNavBar().clickResources().clickPracticeSiteOne();
-        Assert.assertEquals(practiceSiteOnePage.getTitleLoadForm(), practiceSiteOnePage.TITLE_LOAD_FORM_);
+        Assert.assertEquals(practiceSiteOnePage.getTitleLoadForm(), practiceSiteOnePage.TITLE_LOAD_FORM);
     }
 }
