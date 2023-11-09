@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static config.WebConfig.getUrl;
+import static config.WebConfig.getBaseUrl;
 import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.clickButton;
 import static steps.MainSteps.scrollToElement;
@@ -36,11 +36,11 @@ public class MainPage extends BasePage {
 
     public MainPage(WebDriver webDriver) {
         super(webDriver);
-        openMainPage();
     }
-
-    void openMainPage() {
-        driver.get(getUrl());
+    @Step("Открытие главной страницы way2automation.com")
+    public MainPage openMainPage() {
+        driver.get(getBaseUrl());
+        return this;
     }
 
     public Header onHeader() {

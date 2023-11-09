@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import steps.MainSteps;
 
-import static config.WebConfig.getUrl;
 import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.*;
 
@@ -33,31 +32,25 @@ public class AuthorizationPage extends BasePage {
 
     public AuthorizationPage(WebDriver webDriver) {
         super(webDriver);
-        openMainPage();
-    }
-
-    @Step("Открытие главной страницы")
-    void openMainPage() {
-        driver.get(getUrl());
     }
 
     @Step("Ввод значения '{text}' в поле 'Username'")
     public AuthorizationPage inputUsername(String text) {
         waitElementIsVisible(driver, username);
-        clearAndType(driver, username, text);
+        clearAndType(username, text);
         return this;
     }
 
     @Step("Ввод значения '{text}' в поле 'Password'")
     public AuthorizationPage inputPassword(String text) {
         waitElementIsVisible(driver, password);
-        clearAndType(driver, password, text);
+        clearAndType(password, text);
         return this;
     }
 
     @Step("Ввод значения '{text}' в поле 'Username *'")
     public AuthorizationPage inputUsernameDescription(String text) {
-        clearAndType(driver, usernameDescription, text);
+        clearAndType(usernameDescription, text);
         return this;
     }
 

@@ -5,10 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import pages.AuthorizationPage;
-import pages.MainPage;
-import pages.PracticeSiteOnePage;
-import pages.PracticeSiteTwoPage;
+import pages.*;
 
 import static config.WebConfig.getClearCookies;
 import static helpers.WebDriverFactory.createWebDriver;
@@ -20,14 +17,17 @@ public class BaseTest {
     protected PracticeSiteOnePage practiceSiteOnePage;
     protected PracticeSiteTwoPage practiceSiteTwoPage;
     protected static AuthorizationPage authorizationPage;
+    protected static SqlExPage sqlExPage;
 
     @BeforeTest
+    @Step("Открытие браузера")
     public void init() {
         driver = createWebDriver();
         mainPage = new MainPage(driver);
         practiceSiteOnePage = new PracticeSiteOnePage(driver);
         practiceSiteTwoPage = new PracticeSiteTwoPage(driver);
         authorizationPage = new AuthorizationPage(driver);
+        sqlExPage = new SqlExPage(driver);
     }
 
     @AfterTest

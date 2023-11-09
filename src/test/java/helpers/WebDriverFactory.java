@@ -38,6 +38,7 @@ public class WebDriverFactory {
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--no-sandbox")
                 .addArguments("--disable-dev-shm-usage")
+                .addArguments("--disable-extensions")
                 .addArguments("--window-size=1920,1080"));
     }
 
@@ -52,6 +53,7 @@ public class WebDriverFactory {
                 .addArguments("--remote-allow-origins=*")
                 .addArguments("--no-sandbox")
                 .addArguments("--disable-dev-shm-usage")
+                .addArguments("--disable-extensions")
                 .addArguments("--window-size=1920,1080"));
     }
 }
