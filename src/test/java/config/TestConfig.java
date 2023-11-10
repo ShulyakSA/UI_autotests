@@ -20,4 +20,8 @@ public class TestConfig extends ConfigProvider {
     public static String getPasswordSqlEx() {
         return getProperty("passSqlEx");
     }
+
+    public static String getCookieNameSqlEx() {
+        return getProperty("cookieNameSqlEx");
+    }
 }

@@ -2,13 +2,13 @@ package tests;
 
 import helpers.TestListener;
 import io.qameta.allure.Step;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import pages.*;
 
 import static config.WebConfig.getClearCookies;
 import static helpers.WebDriverFactory.createWebDriver;
+import static steps.MainSteps.clearCookies;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -31,18 +31,18 @@ public class BaseTest {
     }
 
     @AfterTest
-    @Step("Очистка кэша")
     void clearCookiesAndLocalStorage() {
         if (getClearCookies()) {
-            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-            driver.manage().deleteAllCookies();
-            javascriptExecutor.executeScript("window.sessionStorage.clear()");
+            clearCookies(driver);
         }
     }
 
     @AfterTest
     @Step("Закрытие браузера")
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.close();
+            driver.quit();
+        }
     }
 }

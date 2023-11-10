@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static config.TestConfig.getPasswordSqlEx;
-import static config.TestConfig.getUsernameSqlEx;
+import static config.TestConfig.*;
 import static config.WebConfig.getSqlExUrl;
 import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.*;
@@ -26,6 +25,9 @@ public class SqlExPage {
     WebElement loginButton;
     @FindBy(xpath = "//b/a[@href='/personal.php']")
     WebElement profileLink;
+
+    @FindBy(xpath ="//a[@href='/logout.php']")
+    WebElement logoutLink;
 
     public SqlExPage(WebDriver webDriver) {
         try {
@@ -61,19 +63,23 @@ public class SqlExPage {
         clickButton(driver, loginButton);
     }
 
+    @Step("Нажатие на кнопку 'Выход'")
+    public void clickLogoutButton() {
+        clickButton(driver, logoutLink);
+    }
+
     @Step("Базовая авторизация")
     public SqlExPage basicAuth() {
         inputUsername(getUsernameSqlEx())
                 .inputPassword(getPasswordSqlEx())
                 .clickLoginButton();
-        saveCookiesInFile(driver);
         return this;
     }
 
     @Step("Авторизация через Cookies")
     public SqlExPage authorizationWithCookies() {
         waitElementIsVisible(driver, loginInput);
-        addCookiesOnCurrentSession(driver);
+        addCookiesOnCurrentSession(driver, getCookieNameSqlEx());
         return this;
     }
 

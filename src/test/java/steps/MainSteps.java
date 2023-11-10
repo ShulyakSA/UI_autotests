@@ -1,17 +1,17 @@
 package steps;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.BasePage;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.StringTokenizer;
+
+import java.util.Scanner;
 
 import static helpers.Waits.*;
 
@@ -54,19 +54,14 @@ public class MainSteps extends BasePage {
         return element.getText();
     }
 
-    public static void saveCookiesInFile(WebDriver driver) {
+    @Step("Сохранение cookies '{cookieName}' в файл")
+    public static void saveCookiesInFile(WebDriver driver, String cookieName) {
         File file = new File("src/test/resources/cookies.data");
         try {
             file.delete();
             file.createNewFile();
             FileWriter fileWrite = new FileWriter(file);
-            BufferedWriter bWrite = new BufferedWriter(fileWrite);
-            for (Cookie cookie : driver.manage().getCookies()) {
-                bWrite.write((cookie.getName() + "|" + cookie.getValue() + "|" + cookie.getDomain() + "|" + cookie.getPath() + "|" + cookie.getExpiry() + "|" + cookie.isSecure()));
-                bWrite.newLine();
-            }
-            bWrite.close();
-            bWrite.flush();
+            fileWrite.write(driver.manage().getCookieNamed(cookieName).getValue());
             fileWrite.close();
             fileWrite.flush();
         } catch (Exception ex) {
@@ -74,44 +69,37 @@ public class MainSteps extends BasePage {
         }
     }
 
-    public static void addCookiesFromFile(WebDriver driver) {
+    @Step("Чтение куки '{cookieName}' из файла")
+    public static void addCookiesFromFile(WebDriver driver, String cookieName) {
         try {
             File file = new File("src/test/resources/cookies.data");
             FileReader fileReader = new FileReader(file);
-            BufferedReader bReader = new BufferedReader(fileReader);
-            String strline;
-            while ((strline = bReader.readLine()) != null) {
-                StringTokenizer token = new StringTokenizer(strline, "|");
-                while (token.hasMoreTokens()) {
-                    String name = token.nextToken();
-                    String value = token.nextToken();
-                    String domain = token.nextToken();
-                    String path = token.nextToken();
-                    Date expiry = null;
-                    String val;
-                    if (!(val = token.nextToken()).equals("null")) {
-                        expiry = new SimpleDateFormat("EEE MMM dd H:mm:ss zzz yyyy", Locale.US).parse(val);
-                    }
-                    Boolean isSecure = new Boolean(token.nextToken()).booleanValue();
-                    Cookie cookie = new Cookie.Builder(name, value)
-                            .path(path)
-                            .domain(domain)
-                            .expiresOn(expiry)
-                            .isSecure(isSecure)
-                            .build();
-                    driver.manage().addCookie(cookie);
-                }
-            }
-            bReader.close();
+            Scanner scan = new Scanner(fileReader);
+            String value = scan.nextLine();
+            Cookie cookie = new Cookie(cookieName, value);
+            driver.manage().addCookie(cookie);
             fileReader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void addCookiesOnCurrentSession(WebDriver driver) {
+    @Step("Очистка кэша и cookies браузера")
+    public static void clearCookies(WebDriver driver) {
         driver.manage().deleteAllCookies();
-        addCookiesFromFile(driver);
+        JavascriptExecutor je = (JavascriptExecutor) driver;
+        je.executeScript("window.sessionStorage.clear()");
+    }
+
+    @Step("Обновление страницы")
+    public static void refreshPage(WebDriver driver) {
         driver.navigate().refresh();
+    }
+
+    @Step("Добавление куки '{cookieName}' в текущую сессию")
+    public static void addCookiesOnCurrentSession(WebDriver driver, String cookieName) {
+        clearCookies(driver);
+        addCookiesFromFile(driver, cookieName);
+        refreshPage(driver);
     }
 }
