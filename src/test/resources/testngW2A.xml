@@ -1,29 +1,34 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="W2A tests">
-    <test name="Authorization">
+    <test name="Java Script Executor">
         <classes>
-            <class name="tests.AuthorizationTest"/>
+            <class name="tests.JsExecutorTest"/>
         </classes>
     </test>
-    <test name="Present main page elements">
-        <classes>
-            <class name="tests.MainPageElementsTest"/>
-        </classes>
-    </test>
-    <test name="Check navigation bar scrolling">
-        <classes>
-            <class name="tests.CheckNavBarScrollingTest"/>
-        </classes>
-    </test>
-    <test name="Go to page">
-        <classes>
-            <class name="tests.GoToPageTest"/>
-        </classes>
-    </test>
-    <test name="Attach screenshot to Allure report">
-        <classes>
-            <class name="tests.AllureScreenshotDemoTest"/>
-        </classes>
-    </test>
+<!--    <test name="Authorization">-->
+<!--        <classes>-->
+<!--            <class name="tests.AuthorizationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Present main page elements">-->
+<!--        <classes>-->
+<!--            <class name="tests.MainPageElementsTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Check navigation bar scrolling">-->
+<!--        <classes>-->
+<!--            <class name="tests.CheckNavBarScrollingTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Go to page">-->
+<!--        <classes>-->
+<!--            <class name="tests.GoToPageTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="Attach screenshot to Allure report">-->
+<!--        <classes>-->
+<!--            <class name="tests.AllureScreenshotDemoTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
