@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -15,6 +16,10 @@ import static steps.Checkers.checkElementIsPresent;
 @Epic(value="Главная страница")
 @Feature(value="Наличие элементов")
 public class MainPageElementsTest extends BaseTest {
+    @BeforeTest
+    public void openPage(){
+        mainPage.openMainPage();
+    }
 
     @Story(value="Элементы хедера")
     @Severity(CRITICAL)

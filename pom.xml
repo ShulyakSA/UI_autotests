@@ -17,6 +17,37 @@
         <aspectj.version>1.9.19</aspectj.version>
         <allure-testng.version>2.21.0</allure-testng.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>AllTests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>SqlEx</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+            <suiteXmlFile>src/test/resources/testngSqlEx.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>W2A</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+            <suiteXmlFile>src/test/resources/testngW2A.xml</suiteXmlFile>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -47,7 +78,7 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                     <properties>
                         <configurationParameters>

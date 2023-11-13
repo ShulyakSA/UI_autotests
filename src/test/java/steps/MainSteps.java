@@ -1,10 +1,17 @@
 package steps;
 
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.BasePage;
+
+import java.io.*;
+
+import java.util.Scanner;
 
 import static helpers.Waits.*;
 
@@ -27,7 +34,7 @@ public class MainSteps extends BasePage {
         new Actions(driver).scrollToElement(element).build().perform();
     }
 
-    public static void clearAndType(WebDriver driver, WebElement element, String text) {
+    public static void clearAndType(WebElement element, String text) {
         element.clear();
         element.sendKeys(text);
     }
@@ -45,5 +52,54 @@ public class MainSteps extends BasePage {
     public static String getText(WebDriver driver, WebElement element) {
         waitElementIsVisible(driver, element);
         return element.getText();
+    }
+
+    @Step("Сохранение cookies '{cookieName}' в файл")
+    public static void saveCookiesInFile(WebDriver driver, String cookieName) {
+        File file = new File("src/test/resources/cookies.data");
+        try {
+            file.delete();
+            file.createNewFile();
+            FileWriter fileWrite = new FileWriter(file);
+            fileWrite.write(driver.manage().getCookieNamed(cookieName).getValue());
+            fileWrite.close();
+            fileWrite.flush();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Step("Чтение куки '{cookieName}' из файла")
+    public static void addCookiesFromFile(WebDriver driver, String cookieName) {
+        try {
+            File file = new File("src/test/resources/cookies.data");
+            FileReader fileReader = new FileReader(file);
+            Scanner scan = new Scanner(fileReader);
+            String value = scan.nextLine();
+            Cookie cookie = new Cookie(cookieName, value);
+            driver.manage().addCookie(cookie);
+            fileReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Step("Очистка кэша и cookies браузера")
+    public static void clearCookies(WebDriver driver) {
+        driver.manage().deleteAllCookies();
+        JavascriptExecutor je = (JavascriptExecutor) driver;
+        je.executeScript("window.sessionStorage.clear()");
+    }
+
+    @Step("Обновление страницы")
+    public static void refreshPage(WebDriver driver) {
+        driver.navigate().refresh();
+    }
+
+    @Step("Добавление куки '{cookieName}' в текущую сессию")
+    public static void addCookiesOnCurrentSession(WebDriver driver, String cookieName) {
+        clearCookies(driver);
+        addCookiesFromFile(driver, cookieName);
+        refreshPage(driver);
     }
 }

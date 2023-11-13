@@ -18,7 +18,8 @@ public class AuthorizationTest extends BaseTest {
 
     @BeforeTest
     public void gotoRegistrationForm() {
-        mainPage.onNavBar()
+        mainPage.openMainPage()
+                .onNavBar()
                 .clickResources()
                 .clickPracticeSiteTwo();
         practiceSiteTwoPage.clickRegistrationFormLink();
@@ -28,10 +29,10 @@ public class AuthorizationTest extends BaseTest {
     @DataProvider(name = "Auth")
     public static Object[][] AuthData() {
         return new Object[][]{
-                {getUsername(), getPassword(), getUsernameDescription(), authorizationPage.SUCCESS_MESSAGE},
-                {"Petrovich", getPassword(), getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
-                {getUsername(), "QWERTY", getUsernameDescription(), authorizationPage.FAILED_MESSAGE},
-                {getUsername(), getPassword(), "Ivan Petrovich", authorizationPage.SUCCESS_MESSAGE},
+                {getUsernameW2A(), getPasswordW2A(), getUsernameDescriptionW2A(), authorizationPage.SUCCESS_MESSAGE},
+                {"Petrovich", getPasswordW2A(), getUsernameDescriptionW2A(), authorizationPage.FAILED_MESSAGE},
+                {getUsernameW2A(), "QWERTY", getUsernameDescriptionW2A(), authorizationPage.FAILED_MESSAGE},
+                {getUsernameW2A(), getPasswordW2A(), "Ivan Petrovich", authorizationPage.SUCCESS_MESSAGE},
         };
     }
 

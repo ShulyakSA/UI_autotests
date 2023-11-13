@@ -6,8 +6,12 @@ import static java.lang.Long.parseLong;
 import static java.time.Duration.ofSeconds;
 
 public class WebConfig extends ConfigProvider {
-    public static String getUrl() {
+    public static String getBaseUrl() {
         return getProperty("baseUrl");
+    }
+
+    public static String getSqlExUrl() {
+        return getProperty("sqlExUrl");
     }
 
     public static String getBrowser() {

@@ -2,15 +2,12 @@ package helpers;
 
 import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+
 import tests.BaseTest;
 
 import javax.imageio.ImageIO;
@@ -44,6 +41,9 @@ public class TestListener implements ITestListener {
     public byte[] attachScreenshotToAllure(BufferedImage screenshot, String format) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(screenshot, format, baos);
-        return baos.toByteArray();
+        byte[] bytes=baos.toByteArray();
+        baos.close();
+        baos.flush();
+        return bytes;
     }
 }

@@ -2,16 +2,13 @@ package tests;
 
 import helpers.TestListener;
 import io.qameta.allure.Step;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import pages.AuthorizationPage;
-import pages.MainPage;
-import pages.PracticeSiteOnePage;
-import pages.PracticeSiteTwoPage;
+import pages.*;
 
 import static config.WebConfig.getClearCookies;
 import static helpers.WebDriverFactory.createWebDriver;
+import static steps.MainSteps.clearCookies;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -20,29 +17,32 @@ public class BaseTest {
     protected PracticeSiteOnePage practiceSiteOnePage;
     protected PracticeSiteTwoPage practiceSiteTwoPage;
     protected static AuthorizationPage authorizationPage;
+    protected static SqlExPage sqlExPage;
 
     @BeforeTest
+    @Step("Открытие браузера")
     public void init() {
         driver = createWebDriver();
         mainPage = new MainPage(driver);
         practiceSiteOnePage = new PracticeSiteOnePage(driver);
         practiceSiteTwoPage = new PracticeSiteTwoPage(driver);
         authorizationPage = new AuthorizationPage(driver);
+        sqlExPage = new SqlExPage(driver);
     }
 
     @AfterTest
-    @Step("Очистка кэша")
     void clearCookiesAndLocalStorage() {
         if (getClearCookies()) {
-            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-            driver.manage().deleteAllCookies();
-            javascriptExecutor.executeScript("window.sessionStorage.clear()");
+            clearCookies(driver);
         }
     }
 
     @AfterTest
     @Step("Закрытие браузера")
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.close();
+            driver.quit();
+        }
     }
 }
