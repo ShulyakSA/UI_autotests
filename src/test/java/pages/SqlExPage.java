@@ -26,7 +26,7 @@ public class SqlExPage {
     @FindBy(xpath = "//b/a[@href='/personal.php']")
     WebElement profileLink;
 
-    @FindBy(xpath ="//a[@href='/logout.php']")
+    @FindBy(xpath = "//a[@href='/logout.php']")
     WebElement logoutLink;
 
     public SqlExPage(WebDriver webDriver) {

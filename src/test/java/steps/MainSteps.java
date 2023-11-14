@@ -102,4 +102,22 @@ public class MainSteps extends BasePage {
         addCookiesFromFile(driver, cookieName);
         refreshPage(driver);
     }
+
+    @Step("Снятие фокуса с элемента '{elementName}'")
+    public static void unFocus(WebDriver driver, WebElement element, String elementName) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].blur();", element);
+    }
+
+    @Step("Вертикальная прокрутка страницы на {pixels} пискелей")
+    public static void scrollBy(WebDriver driver, String pixels) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,arguments[0])", pixels);
+    }
+
+    @Step("Получение текущей координаты по Y")
+    public static String getActualYCoordinate(WebDriver driver) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return (js.executeScript("return window.pageYOffset")).toString();
+    }
 }

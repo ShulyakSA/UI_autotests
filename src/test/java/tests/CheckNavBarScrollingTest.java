@@ -11,11 +11,11 @@ import org.testng.annotations.Test;
 import static io.qameta.allure.SeverityLevel.MINOR;
 import static steps.Checkers.checkElementIsDisplayed;
 
-@Epic(value="Главная страница")
+@Epic(value = "Главная страница")
 @Feature(value = "Отображение панели при скроллинге")
 public class CheckNavBarScrollingTest extends BaseTest {
     @BeforeTest
-    public void openPage(){
+    public void openPage() {
         mainPage.openMainPage();
     }
 

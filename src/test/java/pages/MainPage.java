@@ -13,8 +13,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static config.WebConfig.getBaseUrl;
 import static helpers.Waits.waitElementIsVisible;
-import static steps.MainSteps.clickButton;
-import static steps.MainSteps.scrollToElement;
+import static steps.MainSteps.*;
 
 @Slf4j
 public class MainPage extends BasePage {
@@ -37,6 +36,7 @@ public class MainPage extends BasePage {
     public MainPage(WebDriver webDriver) {
         super(webDriver);
     }
+
     @Step("Открытие главной страницы way2automation.com")
     public MainPage openMainPage() {
         driver.get(getBaseUrl());
@@ -103,6 +103,7 @@ public class MainPage extends BasePage {
     public void clickButtonNextSlide() {
         clickButton(driver, nextSlideButton);
     }
+
     @Step("Нажатие на кнопку слайдера 'Next slide'")
     public void clickButtonPreviousSlide() {
         clickButton(driver, previousSlideButton);

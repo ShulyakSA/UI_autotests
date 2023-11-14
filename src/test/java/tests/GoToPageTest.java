@@ -10,15 +10,15 @@ import org.testng.annotations.Test;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 
-@Epic(value="Главная страница")
-@Feature(value="Переходы по меню")
+@Epic(value = "Главная страница")
+@Feature(value = "Переходы по меню")
 public class GoToPageTest extends BaseTest {
     @BeforeTest
-    public void openPage(){
+    public void openPage() {
         mainPage.openMainPage();
     }
 
-    @Story(value="Переходы по меню 'Resources'")
+    @Story(value = "Переходы по меню 'Resources'")
     @Severity(BLOCKER)
     @Test(description = "Проверка перехода по меню 'Resources' на страницу 'Practice Site 1'")
     public void goToPage() {

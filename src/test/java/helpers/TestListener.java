@@ -41,7 +41,7 @@ public class TestListener implements ITestListener {
     public byte[] attachScreenshotToAllure(BufferedImage screenshot, String format) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(screenshot, format, baos);
-        byte[] bytes=baos.toByteArray();
+        byte[] bytes = baos.toByteArray();
         baos.close();
         baos.flush();
         return bytes;
