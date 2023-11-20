@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import steps.MainSteps;
 
 import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.*;
@@ -30,27 +29,25 @@ public class AuthorizationPage extends BasePage {
     @FindBy(xpath = "//div[@ng-if='Auth.error']")
     WebElement failedMessage;
 
-    public AuthorizationPage(WebDriver webDriver) {
+    public AuthorizationPage(final WebDriver webDriver) {
         super(webDriver);
     }
 
     @Step("Ввод значения '{text}' в поле 'Username'")
     public AuthorizationPage inputUsername(String text) {
-        waitElementIsVisible(driver, username);
-        clearAndType(username, text);
+        clearAndType(driver, username, text);
         return this;
     }
 
     @Step("Ввод значения '{text}' в поле 'Password'")
     public AuthorizationPage inputPassword(String text) {
-        waitElementIsVisible(driver, password);
-        clearAndType(password, text);
+        clearAndType(driver,password, text);
         return this;
     }
 
     @Step("Ввод значения '{text}' в поле 'Username *'")
     public AuthorizationPage inputUsernameDescription(String text) {
-        clearAndType(usernameDescription, text);
+        clearAndType(driver, usernameDescription, text);
         return this;
     }
 
@@ -62,12 +59,6 @@ public class AuthorizationPage extends BasePage {
     @Step("Клик на ссылку 'Logout'")
     public void clickLogoutLink() {
         clickButton(driver, logoutLink);
-    }
-
-    @Step("Переключение на окно авторизации")
-    public AuthorizationPage switchToThisWindow() {
-        MainSteps.switchToWindow(driver);
-        return this;
     }
 
     @Step("Получение текста сообщения об успешном входе: '" + SUCCESS_MESSAGE + "'")

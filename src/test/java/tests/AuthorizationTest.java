@@ -1,44 +1,40 @@
 package tests;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
-import static config.TestConfig.*;
+import org.testng.annotations.*;
+
 import static io.qameta.allure.SeverityLevel.BLOCKER;
+import static steps.MainSteps.switchToWindow;
 
 @Epic(value = "Форма регистрации")
 @Feature(value = "Авторизация")
 public class AuthorizationTest extends BaseTest {
 
-    @BeforeTest
+    @BeforeClass(description = "Переход на форму")
     public void gotoRegistrationForm() {
         mainPage.openMainPage()
                 .onNavBar()
                 .clickResources()
                 .clickPracticeSiteTwo();
         practiceSiteTwoPage.clickRegistrationFormLink();
-        authorizationPage.switchToThisWindow();
+        switchToWindow(driver.get());
     }
 
     @DataProvider(name = "Auth")
-    public static Object[][] AuthData() {
+    public Object[][] authData() {
         return new Object[][]{
-                {getUsernameW2A(), getPasswordW2A(), getUsernameDescriptionW2A(), authorizationPage.SUCCESS_MESSAGE},
-                {"Petrovich", getPasswordW2A(), getUsernameDescriptionW2A(), authorizationPage.FAILED_MESSAGE},
-                {getUsernameW2A(), "QWERTY", getUsernameDescriptionW2A(), authorizationPage.FAILED_MESSAGE},
-                {getUsernameW2A(), getPasswordW2A(), "Ivan Petrovich", authorizationPage.SUCCESS_MESSAGE},
+                {config.getTestConfig().getUsernameW2A(), config.getTestConfig().getPassW2A(), config.getTestConfig().getDescriptionW2A(), authorizationPage.SUCCESS_MESSAGE},
+                {"Petrovich", config.getTestConfig().getPassW2A(), config.getTestConfig().getDescriptionW2A(), authorizationPage.FAILED_MESSAGE},
+                {config.getTestConfig().getUsernameW2A(), "QWERTY", config.getTestConfig().getDescriptionW2A(), authorizationPage.FAILED_MESSAGE},
+                {config.getTestConfig().getUsernameW2A(), config.getTestConfig().getPassW2A(), "Ivan Petrovich", authorizationPage.SUCCESS_MESSAGE},
         };
     }
 
     @Story(value = "Заполнение формы регистрации")
     @Severity(BLOCKER)
-    @Test(description = "Проверка авторизации", dataProvider = "Auth")
+    @Test(description = "Проверка авторизации", dataProvider = "Auth", singleThreaded = true)
     public void authorizationTest(String userName, String password, String description, String expectedMessage) {
         authorizationPage
                 .inputUsername(userName)

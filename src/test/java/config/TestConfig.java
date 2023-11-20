@@ -1,27 +1,13 @@
 package config;
 
-public class TestConfig extends ConfigProvider {
-    public static String getUsernameW2A() {
-        return getProperty("usernameW2A");
-    }
+import lombok.Data;
 
-    public static String getPasswordW2A() {
-        return getProperty("passW2A");
-    }
-
-    public static String getUsernameDescriptionW2A() {
-        return getProperty("descriptionW2A");
-    }
-
-    public static String getUsernameSqlEx() {
-        return getProperty("usernameSqlEx");
-    }
-
-    public static String getPasswordSqlEx() {
-        return getProperty("passSqlEx");
-    }
-
-    public static String getCookieNameSqlEx() {
-        return getProperty("cookieNameSqlEx");
-    }
+@Data
+public class TestConfig {
+    private String usernameW2A;
+    private String passW2A;
+    private String descriptionW2A;
+    private String usernameSqlEx;
+    private String passSqlEx;
+    private String cookieNameSqlEx;
 }

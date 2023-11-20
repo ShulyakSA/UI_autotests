@@ -13,7 +13,7 @@ public class PracticeSiteTwoPage extends BasePage {
     @FindBy(linkText = "Registration")
     WebElement registrationFormLink;
 
-    public PracticeSiteTwoPage(WebDriver webDriver) {
+    public PracticeSiteTwoPage(final WebDriver webDriver) {
         super(webDriver);
     }
 

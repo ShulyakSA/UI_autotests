@@ -25,7 +25,7 @@ public class TestListener implements ITestListener {
         String screenshotName = result.getTestContext().getName() +
                 String.valueOf(System.currentTimeMillis()).substring(9, 13);
         log.info("Trying to trace screenShot...");
-        WebDriver webDriver = ((BaseTest) result.getInstance()).driver;
+        WebDriver webDriver = ((BaseTest) result.getInstance()).driver.get();
         BufferedImage screenshot = new AShot().takeScreenshot(webDriver).getImage();
         String format = "PNG";
         try {

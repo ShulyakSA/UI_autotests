@@ -13,7 +13,8 @@ import java.io.*;
 
 import java.util.Scanner;
 
-import static helpers.Waits.*;
+import static helpers.Waits.waitElementIsClickable;
+import static helpers.Waits.waitElementIsVisible;
 
 @Slf4j
 public class MainSteps extends BasePage {
@@ -24,7 +25,7 @@ public class MainSteps extends BasePage {
         this.driver = webDriver;
     }
 
-    public static void clickButton(WebDriver driver, WebElement element) {
+    public static void  clickButton(WebDriver driver, WebElement element) {
         waitElementIsClickable(driver, element);
         element.click();
     }
@@ -34,7 +35,8 @@ public class MainSteps extends BasePage {
         new Actions(driver).scrollToElement(element).build().perform();
     }
 
-    public static void clearAndType(WebElement element, String text) {
+    public static void clearAndType(WebDriver driver, WebElement element, String text) {
+        waitElementIsVisible(driver, element);
         element.clear();
         element.sendKeys(text);
     }
@@ -63,7 +65,6 @@ public class MainSteps extends BasePage {
             FileWriter fileWrite = new FileWriter(file);
             fileWrite.write(driver.manage().getCookieNamed(cookieName).getValue());
             fileWrite.close();
-            fileWrite.flush();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
