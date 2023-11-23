@@ -55,6 +55,15 @@
                 <suiteXmlFile>src/test/resources/suites/testngParallel.xml</suiteXmlFile>
             </properties>
         </profile>
+        <profile>
+            <id>FailedTests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suiteXmlFile>target\surefire-reports\testng-failed.xml</suiteXmlFile>
+            </properties>
+        </profile>
     </profiles>
 
     <build>
