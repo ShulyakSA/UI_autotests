@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.*;
 
 @Slf4j
@@ -20,7 +19,7 @@ public class PracticeSiteOnePage extends BasePage {
     @FindBy(xpath = "//div[@class='fancybox-skin']//a[text()='ENTER TO THE TESTING WEBSITE']")
     WebElement testLink;
 
-    public PracticeSiteOnePage(WebDriver webDriver) {
+    public PracticeSiteOnePage(final WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -31,8 +30,7 @@ public class PracticeSiteOnePage extends BasePage {
 
     @Step("Ввод значения '{text}' в текстовое поле 'Name'")
     public PracticeSiteOnePage inputName(String text) {
-        waitElementIsVisible(driver, nameInput);
-        clearAndType(nameInput, text);
+        clearAndType(driver, nameInput, text);
         return this;
     }
 

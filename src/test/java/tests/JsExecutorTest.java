@@ -6,10 +6,9 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static config.TestConfig.getUsernameW2A;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static steps.MainSteps.getActualYCoordinate;
 import static steps.MainSteps.scrollBy;
@@ -17,7 +16,7 @@ import static steps.MainSteps.scrollBy;
 @Epic(value = "Главная страница")
 @Feature(value = "Выполнение скриптов на странице")
 public class JsExecutorTest extends BaseTest {
-    @BeforeTest
+    @BeforeClass
     public void openPage() {
         mainPage.openMainPage();
     }
@@ -27,9 +26,9 @@ public class JsExecutorTest extends BaseTest {
     @Test(description = "Проверка методов скролла и фокуса JavaScript")
     public void checkJsExecutor() {
         mainPage.onNavBar().clickResources().clickPracticeSiteOne();
-        practiceSiteOnePage.inputName(getUsernameW2A()).unFocusNameInput();
+        practiceSiteOnePage.inputName(config.getTestConfig().getUsernameW2A()).unFocusNameInput();
         practiceSiteOnePage.clickTestLink();
-        scrollBy(driver, "500");
-        Assert.assertEquals(getActualYCoordinate(driver), "500");
+        scrollBy(driver.get(), "500");
+        Assert.assertEquals(getActualYCoordinate(driver.get()), "500");
     }
 }

@@ -96,7 +96,7 @@ public class NavBar {
         return this;
     }
 
-    @Step("Нажатие на элемент '"+RESOURCES_MENU+"'")
+    @Step("Нажатие на элемент '" + RESOURCES_MENU + "'")
     public NavBar clickResources() {
         clickButton(driver, getResourcesMenu());
         return this;

@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static config.WebConfig.getBaseUrl;
 import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.*;
 
@@ -33,13 +32,13 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//div[@aria-label='Previous slide']")
     WebElement previousSlideButton;
 
-    public MainPage(WebDriver webDriver) {
+    public MainPage(final WebDriver webDriver) {
         super(webDriver);
     }
 
     @Step("Открытие главной страницы way2automation.com")
     public MainPage openMainPage() {
-        driver.get(getBaseUrl());
+        driver.get(config.getWebConfig().getW2aUrl());
         return this;
     }
 

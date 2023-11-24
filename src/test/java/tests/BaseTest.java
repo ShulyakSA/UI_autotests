@@ -1,50 +1,54 @@
 package tests;
 
+import config.TestConfigFactory;
+
 import helpers.TestListener;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.*;
 import pages.*;
 
-import static config.WebConfig.getClearCookies;
+import java.net.MalformedURLException;
+
 import static helpers.WebDriverFactory.createWebDriver;
 import static steps.MainSteps.clearCookies;
 
 @Listeners(TestListener.class)
 public class BaseTest {
-    public WebDriver driver;
+    protected static TestConfigFactory config = TestConfigFactory.getInstance();
+    public InheritableThreadLocal<WebDriver> driver = new InheritableThreadLocal<>();
     protected MainPage mainPage;
     protected PracticeSiteOnePage practiceSiteOnePage;
     protected PracticeSiteTwoPage practiceSiteTwoPage;
-    protected static AuthorizationPage authorizationPage;
-    protected static SqlExPage sqlExPage;
+    protected AuthorizationPage authorizationPage;
+    protected SqlExPage sqlExPage;
 
-    @BeforeTest
+    @BeforeClass
     @Step("Открытие браузера")
-    public void init() {
-        driver = createWebDriver();
-        mainPage = new MainPage(driver);
-        practiceSiteOnePage = new PracticeSiteOnePage(driver);
-        practiceSiteTwoPage = new PracticeSiteTwoPage(driver);
-        authorizationPage = new AuthorizationPage(driver);
-        sqlExPage = new SqlExPage(driver);
+    void init() throws MalformedURLException {
+        if (driver.get() == null) {
+            driver.set(createWebDriver());
+        }
+        mainPage = new MainPage(driver.get());
+        practiceSiteOnePage = new PracticeSiteOnePage(driver.get());
+        practiceSiteTwoPage = new PracticeSiteTwoPage(driver.get());
+        authorizationPage = new AuthorizationPage(driver.get());
+        sqlExPage = new SqlExPage(driver.get());
     }
 
-    @AfterTest
-    void clearCookiesAndLocalStorage() {
-        if (getClearCookies()) {
-            clearCookies(driver);
+    @AfterClass
+    void  clearCookiesAndLocalStorage() {
+        if (config.getWebConfig().isClearCookies()) {
+            clearCookies(driver.get());
         }
     }
 
-    @AfterTest
+    @AfterClass(alwaysRun = true)
     @Step("Закрытие браузера")
-    public void tearDown() {
-        if (driver != null) {
-            driver.close();
-            driver.quit();
+    void tearDown() {
+        if (driver.get() != null) {
+            driver.get().close();
+            driver.get().quit();
         }
     }
 }

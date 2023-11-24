@@ -7,7 +7,6 @@ import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static config.TestConfig.getCookieNameSqlEx;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static steps.Checkers.checkElementIsDisplayed;
 import static steps.MainSteps.*;
@@ -17,17 +16,17 @@ import static steps.MainSteps.*;
 public class AuthorizationWithCookiesTest extends BaseTest {
     @Story(value = "Авторизация с сохранением cookies")
     @Severity(BLOCKER)
-    @Test(description = "Проверка авторизации и сохранение cookies в файл", priority=1)
+    @Test(description = "Проверка авторизации и сохранение cookies в файл", priority = 1)
     public void authorizationWithSaveCookiesTest() {
         sqlExPage.openSqlExPage().basicAuth();
         Assert.assertTrue(checkElementIsDisplayed(sqlExPage.getProfileLink()));
-        saveCookiesInFile(driver,getCookieNameSqlEx());
-        clearCookies(driver);
+        saveCookiesInFile(driver.get(), config.getTestConfig().getCookieNameSqlEx());
+        clearCookies(driver.get());
     }
 
     @Story(value = "Авторизация с cookies")
     @Severity(BLOCKER)
-    @Test(description = "Проверка авторизации c cookies", priority=2)
+    @Test(description = "Проверка авторизации c cookies", priority = 2)
     public void authorizationWithCookiesTest() {
         sqlExPage.openSqlExPage().authorizationWithCookies();
         Assert.assertTrue(checkElementIsDisplayed(sqlExPage.getProfileLink()));

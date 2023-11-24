@@ -6,17 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-import static config.TestConfig.*;
-import static config.WebConfig.getSqlExUrl;
 import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.*;
 
 @Slf4j
-public class SqlExPage {
-    protected final WebDriver driver;
-
+public class SqlExPage extends BasePage{
     @FindBy(xpath = "//form[@name='frmlogin']//input[@name='login']")
     WebElement loginInput;
     @FindBy(xpath = "//form[@name='frmlogin']//input[@name='psw']")
@@ -26,35 +21,25 @@ public class SqlExPage {
     @FindBy(xpath = "//b/a[@href='/personal.php']")
     WebElement profileLink;
 
-    @FindBy(xpath = "//a[@href='/logout.php']")
-    WebElement logoutLink;
-
-    public SqlExPage(WebDriver webDriver) {
-        try {
-            PageFactory.initElements(webDriver, this);
-            this.driver = webDriver;
-        } catch (IllegalStateException e) {
-            throw new RuntimeException(e);
-        }
+    public SqlExPage(final WebDriver webDriver) {
+        super(webDriver);
     }
 
     @Step("Открытие страницы sql-ex.ru")
     public SqlExPage openSqlExPage() {
-        driver.get(getSqlExUrl());
+        driver.get(config.getWebConfig().getSqlExUrl());
         return this;
     }
 
     @Step("Ввод значения '{text}' в поле 'Логин'")
     public SqlExPage inputUsername(String text) {
-        waitElementIsVisible(driver, loginInput);
-        clearAndType(loginInput, text);
+        clearAndType(driver, loginInput, text);
         return this;
     }
 
     @Step("Ввод значения '{text}' в поле 'Пароль'")
     public SqlExPage inputPassword(String text) {
-        waitElementIsVisible(driver, passwordInput);
-        clearAndType(passwordInput, text);
+        clearAndType(driver, passwordInput, text);
         return this;
     }
 
@@ -63,15 +48,10 @@ public class SqlExPage {
         clickButton(driver, loginButton);
     }
 
-    @Step("Нажатие на кнопку 'Выход'")
-    public void clickLogoutButton() {
-        clickButton(driver, logoutLink);
-    }
-
     @Step("Базовая авторизация")
     public SqlExPage basicAuth() {
-        inputUsername(getUsernameSqlEx())
-                .inputPassword(getPasswordSqlEx())
+        inputUsername(config.getTestConfig().getUsernameSqlEx())
+                .inputPassword(config.getTestConfig().getPassSqlEx())
                 .clickLoginButton();
         return this;
     }
@@ -79,7 +59,7 @@ public class SqlExPage {
     @Step("Авторизация через Cookies")
     public SqlExPage authorizationWithCookies() {
         waitElementIsVisible(driver, loginInput);
-        addCookiesOnCurrentSession(driver, getCookieNameSqlEx());
+        addCookiesOnCurrentSession(driver, config.getTestConfig().getCookieNameSqlEx());
         return this;
     }
 

@@ -5,34 +5,29 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static steps.Checkers.checkElementIsDisplayed;
 
-@Epic(value="Демонстрации скриншотов в отчете Allure")
-@Feature(value="Наличие элементов")
-public class AllureScreenshotDemoTest extends BaseTest{
-    @BeforeTest
-    public void openPage(){
-        mainPage.openMainPage();
-    }
+@Epic(value = "Демонстрации скриншотов в отчете Allure")
+@Feature(value = "Наличие элементов")
+public class AllureScreenshotDemoTest extends BaseTest {
 
-    @Story(value="Элементы блока с курсами, демонстрация фичи со скриншотами в Allure")
+    @Story(value = "Элементы блока с курсами, демонстрация фичи со скриншотами в Allure")
     @Severity(CRITICAL)
     @Test(description = "Проверка слайдера, падающий тест")
     public void checkCourseBlockSlider() {
-        mainPage.scrollToCourseBlock().clickButtonPreviousSlide();
+        mainPage.openMainPage().scrollToCourseBlock().clickButtonPreviousSlide();
         Assert.assertTrue(checkElementIsDisplayed(mainPage.getAppiumCourse()));
     }
 
-    @Story(value="Переходы по меню 'Resources', демонстрация фичи со скриншотами в Allure")
+    @Story(value = "Переходы по меню 'Resources', демонстрация фичи со скриншотами в Allure")
     @Severity(BLOCKER)
     @Test(description = "Проверка перехода по меню 'Resources' на страницу 'Practice Site 1', падающий тест")
     public void goToPage() {
-        mainPage.onNavBar().scrollToNavbar().clickResources().clickPracticeSiteOne();
+        mainPage.openMainPage().onNavBar().scrollToNavbar().clickResources().clickPracticeSiteOne();
         Assert.assertEquals(practiceSiteOnePage.getTitleLoadForm(), "Title");
     }
 }
