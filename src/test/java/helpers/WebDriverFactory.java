@@ -53,8 +53,8 @@ public class WebDriverFactory {
     private static WebDriver getFirefoxDriver() throws MalformedURLException {
         FirefoxOptions firefoxOptions = new FirefoxOptions()
                 .addArguments("-width=1920")
-                .addArguments("-height=1080");
-        //.addArguments("-headless");
+                .addArguments("-height=1080")
+                .addArguments("-headless");
         return new RemoteWebDriver(new URL("http://localhost:4444"), firefoxOptions);
     }
 }

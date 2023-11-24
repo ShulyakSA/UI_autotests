@@ -1,6 +1,7 @@
 package tests;
 
 import config.TestConfigFactory;
+
 import helpers.TestListener;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -46,6 +47,7 @@ public class BaseTest {
     @Step("Закрытие браузера")
     void tearDown() {
         if (driver.get() != null) {
+            driver.get().close();
             driver.get().quit();
         }
     }
