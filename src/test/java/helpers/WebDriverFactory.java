@@ -42,7 +42,7 @@ public class WebDriverFactory {
                 .addArguments("--window-size=1920,1080")
                 .addArguments("--headless=new");
         chromeOptions.setCapability("platformName", "windows");
-        return new RemoteWebDriver(new URL("http://localhost:4444"), chromeOptions);
+        return new RemoteWebDriver(new URL(config.getWebConfig().getRemoteUrl()), chromeOptions);
     }
 
     /**
@@ -55,6 +55,6 @@ public class WebDriverFactory {
                 .addArguments("-width=1920")
                 .addArguments("-height=1080")
                 .addArguments("-headless");
-        return new RemoteWebDriver(new URL("http://localhost:4444"), firefoxOptions);
+        return new RemoteWebDriver(new URL(config.getWebConfig().getRemoteUrl()), firefoxOptions);
     }
 }

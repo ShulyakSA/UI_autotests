@@ -6,6 +6,7 @@ import lombok.Data;
 public class WebConfig {
     private String w2aUrl;
     private String sqlExUrl;
+    private String remoteUrl;
     private String browser;
     private boolean clearCookies;
     private int explicitWait;
