@@ -10,6 +10,7 @@ import pages.*;
 
 import java.net.MalformedURLException;
 
+import static helpers.WebDriverFactory.Browser.CHROME;
 import static helpers.WebDriverFactory.createWebDriver;
 import static steps.MainSteps.clearCookies;
 
@@ -47,7 +48,9 @@ public class BaseTest {
     @Step("Закрытие браузера")
     void tearDown() {
         if (driver.get() != null) {
+            if(config.getWebConfig().getBrowser()== CHROME){
             driver.get().close();
+            }
             driver.get().quit();
         }
     }

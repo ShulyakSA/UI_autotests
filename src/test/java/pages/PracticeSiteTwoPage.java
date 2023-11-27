@@ -7,10 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static helpers.Waits.waitElementIsVisible;
+import static steps.MainSteps.scrollToElement;
 
 @Slf4j
 public class PracticeSiteTwoPage extends BasePage {
-    @FindBy(linkText = "Registration")
+    @FindBy(xpath = "*//h2[text()='Registration']")
     WebElement registrationFormLink;
 
     public PracticeSiteTwoPage(final WebDriver webDriver) {
@@ -21,6 +22,12 @@ public class PracticeSiteTwoPage extends BasePage {
     public PracticeSiteTwoPage clickRegistrationFormLink() {
         waitElementIsVisible(driver, registrationFormLink);
         registrationFormLink.click();
+        return this;
+    }
+
+    @Step("Переход к блоку 'Registration'")
+    public PracticeSiteTwoPage scrollToRegistrationFormLink() {
+        scrollToElement(driver, registrationFormLink);
         return this;
     }
 }

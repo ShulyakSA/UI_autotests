@@ -25,15 +25,18 @@ public class MainSteps extends BasePage {
         this.driver = webDriver;
     }
 
-    public static void  clickButton(WebDriver driver, WebElement element) {
+    public static void clickButton(WebDriver driver, WebElement element) {
         waitElementIsClickable(driver, element);
         element.click();
     }
 
     public static void scrollToElement(WebDriver driver, WebElement element) {
         waitElementIsVisible(driver, element);
-        new Actions(driver).scrollToElement(element).build().perform();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        new Actions(driver).moveToElement(element).perform();
     }
+
 
     public static void clearAndType(WebDriver driver, WebElement element, String text) {
         waitElementIsVisible(driver, element);
