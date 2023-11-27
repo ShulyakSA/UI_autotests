@@ -1,12 +1,14 @@
 package helpers;
 
+import config.TestConfigFactory;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestNGListener;
 import org.testng.ITestResult;
 
 public class RetryAnalyzer implements IRetryAnalyzer, ITestNGListener {
+    protected static TestConfigFactory config = TestConfigFactory.getInstance();
     private int count = 0;
-    private static int maxTry = 2;
+    private static int maxTry = config.getWebConfig().getRetryCount();
 
     @Override
     public boolean retry(ITestResult iTestResult) {
