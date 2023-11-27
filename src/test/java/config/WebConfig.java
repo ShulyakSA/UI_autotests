@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 public class WebConfig {
-    private String w2aUrl;
+    private String w2aBaseUrl;
+    private String w2aDropPageUrl;
     private String sqlExUrl;
     private String remoteUrl;
     private WebDriverFactory.Browser browser;

@@ -17,10 +17,11 @@
             <class name="tests.JsExecutorTest"/>
         </classes>
     </test>
-    <test name="Page with transitions tests">
+    <test name="Child pages and forms">
         <classes>
             <class name="tests.GoToPageTest"/>
             <class name="tests.AuthorizationTest"/>
+            <class name="tests.DragAndDropTest"/>
         </classes>
     </test>
     <test name="Failed tests">
