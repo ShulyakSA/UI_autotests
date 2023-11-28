@@ -38,7 +38,7 @@ public class MainPage extends BasePage {
 
     @Step("Открытие главной страницы way2automation.com")
     public MainPage openMainPage() {
-        driver.get(config.getWebConfig().getW2aUrl());
+        driver.get(config.getWebConfig().getW2aBaseUrl());
         return this;
     }
 

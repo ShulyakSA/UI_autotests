@@ -1,5 +1,6 @@
 package steps;
 
+import helpers.Waits;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Cookie;
@@ -44,6 +45,12 @@ public class MainSteps extends BasePage {
         element.sendKeys(text);
     }
 
+    public static void dragAndDrop(WebDriver driver, WebElement draggable, WebElement droppable) {
+        waitElementIsClickable(driver, draggable);
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(draggable, droppable).perform();
+    }
+
     public static void switchToWindow(WebDriver driver) {
         String originalWindow = driver.getWindowHandle();
         for (String windowHandle : driver.getWindowHandles()) {
@@ -52,6 +59,11 @@ public class MainSteps extends BasePage {
                 break;
             }
         }
+    }
+
+    public static void switchToFrame(WebDriver driver, WebElement frame) {
+        Waits.waitElementIsVisible(driver, frame);
+        driver.switchTo().frame(frame);
     }
 
     public static String getText(WebDriver driver, WebElement element) {

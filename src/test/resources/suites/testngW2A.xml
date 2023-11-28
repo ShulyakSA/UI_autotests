@@ -31,4 +31,9 @@
             <class name="tests.AllureScreenshotDemoTest"/>
         </classes>
     </test>
+    <test name="Drag And Drop">
+        <classes>
+            <class name="tests.DragAndDropTest"/>
+        </classes>
+    </test>
 </suite>

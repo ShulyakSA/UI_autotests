@@ -22,6 +22,7 @@ public class BaseTest {
     protected PracticeSiteOnePage practiceSiteOnePage;
     protected PracticeSiteTwoPage practiceSiteTwoPage;
     protected AuthorizationPage authorizationPage;
+    protected DroppablePage droppablePage;
     protected SqlExPage sqlExPage;
 
     @BeforeClass
@@ -34,6 +35,7 @@ public class BaseTest {
         practiceSiteOnePage = new PracticeSiteOnePage(driver.get());
         practiceSiteTwoPage = new PracticeSiteTwoPage(driver.get());
         authorizationPage = new AuthorizationPage(driver.get());
+        droppablePage = new DroppablePage(driver.get());
         sqlExPage = new SqlExPage(driver.get());
     }
 
