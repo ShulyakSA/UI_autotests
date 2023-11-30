@@ -36,4 +36,9 @@
             <class name="tests.DragAndDropTest"/>
         </classes>
     </test>
+    <test name="Frames And Windows">
+        <classes>
+            <class name="tests.FramesAndWindowsTest"/>
+        </classes>
+    </test>
 </suite>

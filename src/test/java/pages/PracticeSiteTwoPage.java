@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static helpers.Waits.waitElementIsVisible;
 import static steps.MainSteps.scrollToElement;
+import static steps.MainSteps.switchToWindow;
 
 @Slf4j
 public class PracticeSiteTwoPage extends BasePage {
@@ -28,6 +29,13 @@ public class PracticeSiteTwoPage extends BasePage {
     @Step("Переход к блоку 'Registration'")
     public PracticeSiteTwoPage scrollToRegistrationFormLink() {
         scrollToElement(driver, registrationFormLink);
+        return this;
+    }
+
+    @Step("Переключение на следующее окно")
+    public PracticeSiteTwoPage switchToNextWindow(){
+        String currentHandle=driver.getWindowHandle();
+        switchToWindow(driver, currentHandle);
         return this;
     }
 }
