@@ -23,6 +23,7 @@ public class BaseTest {
     protected PracticeSiteTwoPage practiceSiteTwoPage;
     protected AuthorizationPage authorizationPage;
     protected DroppablePage droppablePage;
+    protected FramesAndWindowsPage framesAndWindowsPage;
     protected SqlExPage sqlExPage;
 
     @BeforeClass
@@ -36,11 +37,12 @@ public class BaseTest {
         practiceSiteTwoPage = new PracticeSiteTwoPage(driver.get());
         authorizationPage = new AuthorizationPage(driver.get());
         droppablePage = new DroppablePage(driver.get());
+        framesAndWindowsPage = new FramesAndWindowsPage(driver.get());
         sqlExPage = new SqlExPage(driver.get());
     }
 
     @AfterClass
-    void  clearCookiesAndLocalStorage() {
+    void clearCookiesAndLocalStorage() {
         if (config.getWebConfig().isClearCookies()) {
             clearCookies(driver.get());
         }
@@ -50,10 +52,10 @@ public class BaseTest {
     @Step("Закрытие браузера")
     void tearDown() {
         if (driver.get() != null) {
-            if(config.getWebConfig().getBrowser()== CHROME){
-            driver.get().close();
-            }
-            driver.get().quit();
+            if (config.getWebConfig().getBrowser() == CHROME) {
+                driver.get().close();
+                driver.get().quit();
+            } else driver.get().quit();
         }
     }
 }

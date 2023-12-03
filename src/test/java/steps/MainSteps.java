@@ -51,13 +51,16 @@ public class MainSteps extends BasePage {
         actions.dragAndDrop(draggable, droppable).perform();
     }
 
-    public static void switchToWindow(WebDriver driver) {
-        String originalWindow = driver.getWindowHandle();
-        for (String windowHandle : driver.getWindowHandles()) {
-            if (!originalWindow.contentEquals(windowHandle)) {
-                driver.switchTo().window(windowHandle);
-                break;
+    public static void switchToWindow(WebDriver driver, String originalWindow) {
+        try {
+            for (String windowHandle : driver.getWindowHandles()) {
+                if (windowHandle != originalWindow) {
+                    driver.switchTo().window(windowHandle);
+                    driver.switchTo().activeElement();
+                }
             }
+        } catch (Exception e) {
+            log.error("Could not get to next page");
         }
     }
 

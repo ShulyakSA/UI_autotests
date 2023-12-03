@@ -18,8 +18,7 @@ public class AuthorizationTest extends BaseTest {
                 .onNavBar()
                 .clickResources()
                 .clickPracticeSiteTwo();
-        practiceSiteTwoPage.scrollToRegistrationFormLink().clickRegistrationFormLink();
-        switchToWindow(driver.get());
+        practiceSiteTwoPage.scrollToRegistrationFormLink().clickRegistrationFormLink().switchToNextWindow();
     }
 
     @DataProvider(name = "Auth")

@@ -9,6 +9,7 @@ public class WebConfig {
     private String w2aDropPageUrl;
     private String sqlExUrl;
     private String remoteUrl;
+    private String w2aFramesAndWindowsUrl;
     private WebDriverFactory.Browser browser;
     private boolean remoteDriver;
     private boolean headlessMode;

@@ -22,6 +22,7 @@
             <class name="tests.GoToPageTest"/>
             <class name="tests.AuthorizationTest"/>
             <class name="tests.DragAndDropTest"/>
+            <class name="tests.FramesAndWindowsTest"/>
         </classes>
     </test>
     <test name="Failed tests">
