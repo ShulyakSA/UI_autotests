@@ -24,7 +24,6 @@ public class FramesAndWindowsPage extends BasePage{
         return this;
     }
 
-
     @Step("Переключение на фрейм 'frames-windows/default1'")
     public FramesAndWindowsPage switchToWindowsFrame() {
         switchToFrame(driver, frame);

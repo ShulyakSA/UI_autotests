@@ -10,6 +10,7 @@ public class WebConfig {
     private String sqlExUrl;
     private String remoteUrl;
     private String w2aFramesAndWindowsUrl;
+    private String w2aAlertUrl;
     private WebDriverFactory.Browser browser;
     private boolean remoteDriver;
     private boolean headlessMode;

@@ -24,6 +24,7 @@ public class BaseTest {
     protected AuthorizationPage authorizationPage;
     protected DroppablePage droppablePage;
     protected FramesAndWindowsPage framesAndWindowsPage;
+    protected AlertPage alertPage;
     protected SqlExPage sqlExPage;
 
     @BeforeClass
@@ -38,6 +39,7 @@ public class BaseTest {
         authorizationPage = new AuthorizationPage(driver.get());
         droppablePage = new DroppablePage(driver.get());
         framesAndWindowsPage = new FramesAndWindowsPage(driver.get());
+        alertPage = new AlertPage(driver.get());
         sqlExPage = new SqlExPage(driver.get());
     }
 
@@ -54,8 +56,8 @@ public class BaseTest {
         if (driver.get() != null) {
             if (config.getWebConfig().getBrowser() == CHROME) {
                 driver.get().close();
-                driver.get().quit();
-            } else driver.get().quit();
+            }
+            driver.get().quit();
         }
     }
 }

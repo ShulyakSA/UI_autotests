@@ -7,7 +7,8 @@ import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import steps.MainSteps;
+
+import java.util.ArrayList;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
@@ -31,7 +32,7 @@ public class FramesAndWindowsTest extends BaseTest {
                 .clickNewBrowserTabLink().switchToNextWindow(firstHandle);
         secondHandle = driver.get().getWindowHandle();
         framesAndWindowsPage.clickNewBrowserTabLink().switchToNextWindow(secondHandle);
-        Assert.assertNotEquals(driver.get().getWindowHandle(), firstHandle);
-        Assert.assertNotEquals(driver.get().getWindowHandle(), secondHandle);
+        ArrayList<String> tabs = new ArrayList<>(driver.get().getWindowHandles());
+        Assert.assertEquals(driver.get().getWindowHandle(), tabs.get(2));
     }
 }
