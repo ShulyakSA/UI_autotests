@@ -3,10 +3,7 @@ package steps;
 import helpers.Waits;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import pages.BasePage;
 
@@ -14,8 +11,7 @@ import java.io.*;
 
 import java.util.Scanner;
 
-import static helpers.Waits.waitElementIsClickable;
-import static helpers.Waits.waitElementIsVisible;
+import static helpers.Waits.*;
 
 @Slf4j
 public class MainSteps extends BasePage {
@@ -37,7 +33,6 @@ public class MainSteps extends BasePage {
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         new Actions(driver).moveToElement(element).perform();
     }
-
 
     public static void clearAndType(WebDriver driver, WebElement element, String text) {
         waitElementIsVisible(driver, element);
@@ -67,6 +62,25 @@ public class MainSteps extends BasePage {
     public static void switchToFrame(WebDriver driver, WebElement frame) {
         Waits.waitElementIsVisible(driver, frame);
         driver.switchTo().frame(frame);
+    }
+
+    @Step("Переход к алерту")
+    public static Alert switchToAlert(WebDriver driver) {
+        waitAlertIsPresent(driver);
+        Alert alert = driver.switchTo().alert();
+        return alert;
+    }
+
+    @Step("Подтверждение алерта")
+    public static Alert acceptAlert(Alert alert) {
+        alert.accept();
+        return alert;
+    }
+
+    @Step("Ввод текста {text}")
+    public static Alert inputTextAlert(Alert alert, String text) {
+        alert.sendKeys(text);
+        return alert;
     }
 
     public static String getText(WebDriver driver, WebElement element) {

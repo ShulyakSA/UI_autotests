@@ -15,14 +15,15 @@
             <class name="tests.MainPageElementsTest"/>
             <class name="tests.CheckNavBarScrollingTest"/>
             <class name="tests.JsExecutorTest"/>
+            <class name="tests.GoToPageTest"/>
         </classes>
     </test>
     <test name="Child pages and forms">
         <classes>
-            <class name="tests.GoToPageTest"/>
             <class name="tests.AuthorizationTest"/>
             <class name="tests.DragAndDropTest"/>
             <class name="tests.FramesAndWindowsTest"/>
+            <class name="tests.AlertsTest"/>
         </classes>
     </test>
     <test name="Failed tests">

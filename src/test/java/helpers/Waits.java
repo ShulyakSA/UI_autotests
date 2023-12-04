@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static java.time.Duration.ofSeconds;
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Waits {
     private static Waits instance;
@@ -37,5 +38,9 @@ public class Waits {
     public static WebElement waitElementIsClickable(WebDriver driver, final WebElement element) {
         getInstance(driver).wait.until(ExpectedConditions.elementToBeClickable(element));
         return element;
+    }
+    @SneakyThrows(NoSuchElementException.class)
+    public static void waitAlertIsPresent(WebDriver driver) {
+        getInstance(driver).wait.until(alertIsPresent());
     }
 }
