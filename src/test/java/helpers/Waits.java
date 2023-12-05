@@ -39,6 +39,7 @@ public class Waits {
         getInstance(driver).wait.until(ExpectedConditions.elementToBeClickable(element));
         return element;
     }
+
     @SneakyThrows(NoSuchElementException.class)
     public static void waitAlertIsPresent(WebDriver driver) {
         getInstance(driver).wait.until(alertIsPresent());

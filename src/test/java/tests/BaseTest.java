@@ -11,6 +11,7 @@ import pages.*;
 import java.net.MalformedURLException;
 
 import static helpers.WebDriverFactory.Browser.CHROME;
+import static helpers.WebDriverFactory.Browser.EDGE;
 import static helpers.WebDriverFactory.createWebDriver;
 import static steps.MainSteps.clearCookies;
 
@@ -26,6 +27,7 @@ public class BaseTest {
     protected FramesAndWindowsPage framesAndWindowsPage;
     protected AlertPage alertPage;
     protected SqlExPage sqlExPage;
+    protected  HttpAuthenticationPage httpAuthenticationPage;
 
     @BeforeClass
     @Step("Открытие браузера")
@@ -41,6 +43,7 @@ public class BaseTest {
         framesAndWindowsPage = new FramesAndWindowsPage(driver.get());
         alertPage = new AlertPage(driver.get());
         sqlExPage = new SqlExPage(driver.get());
+        httpAuthenticationPage=new HttpAuthenticationPage(driver.get());
     }
 
     @AfterClass
@@ -54,7 +57,8 @@ public class BaseTest {
     @Step("Закрытие браузера")
     void tearDown() {
         if (driver.get() != null) {
-            if (config.getWebConfig().getBrowser() == CHROME) {
+            if (config.getWebConfig().getBrowser() == CHROME
+                    || config.getWebConfig().getBrowser() == EDGE) {
                 driver.get().close();
             }
             driver.get().quit();

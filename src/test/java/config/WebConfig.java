@@ -11,6 +11,7 @@ public class WebConfig {
     private String remoteUrl;
     private String w2aFramesAndWindowsUrl;
     private String w2aAlertUrl;
+    private String httpWatchUrl;
     private WebDriverFactory.Browser browser;
     private boolean remoteDriver;
     private boolean headlessMode;

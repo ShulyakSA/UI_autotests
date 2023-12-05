@@ -46,4 +46,9 @@
             <class name="tests.AlertsTest"/>
         </classes>
     </test>
+    <test name="Basic Auth">
+        <classes>
+            <class name="tests.BasicAuthTest"/>
+        </classes>
+    </test>
 </suite>
