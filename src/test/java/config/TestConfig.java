@@ -10,4 +10,6 @@ public class TestConfig {
     private String usernameSqlEx;
     private String passSqlEx;
     private String cookieNameSqlEx;
+    private String usernameHttpWatch;
+    private String passHttpWatch;
 }

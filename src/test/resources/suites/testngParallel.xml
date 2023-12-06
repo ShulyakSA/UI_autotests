@@ -5,9 +5,10 @@
         <listener class-name="helpers.RetryAnalyzer"/>
         <listener class-name="helpers.AnnotationTransformer"/>
     </listeners>
-    <test name="sql-ex Test">
+    <test name="Other site Tests">
         <classes>
             <class name="tests.AuthorizationWithCookiesTest"/>
+            <class name="tests.BasicAuthTest"/>
         </classes>
     </test>
     <test name="Main page W2A tests">
